@@ -14,7 +14,11 @@ let poses = [];
 let earImage;
 
 function preload() {
-  earImage = loadImage('UoKfhYw.png');
+  // 確保圖片路徑正確，圖片應放置在與此檔案相同的資料夾中
+  earImage = loadImage('./UoKfhYw.png', 
+    () => console.log('Image loaded successfully'), 
+    () => console.error('Failed to load image. Ensure UoKfhYw.png is in the same folder as sketch.js.')
+  );
 }
 
 function setup() {
@@ -82,7 +86,7 @@ function drawSkeleton() {
 
 // A function to draw the left ear image
 function drawLeftEar() {
-  if (poses.length > 0) {
+  if (poses.length > 0 && earImage) { // 確保圖片已載入
     for (let i = 0; i < poses.length; i++) {
       let pose = poses[i].pose;
       if (pose && pose.keypoints.length > 3) {
