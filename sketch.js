@@ -82,11 +82,15 @@ function drawSkeleton() {
 
 // A function to draw the left ear image
 function drawLeftEar() {
-  for (let i = 0; i < poses.length; i++) {
-    let pose = poses[i].pose;
-    let leftEar = pose.keypoints[3]; // Index 3 corresponds to the left ear
-    if (leftEar.score > 0.2) {
-      image(earImage, leftEar.position.x - 15, leftEar.position.y - 15, 30, 30);
+  if (poses.length > 0) {
+    for (let i = 0; i < poses.length; i++) {
+      let pose = poses[i].pose;
+      if (pose && pose.keypoints.length > 3) {
+        let leftEar = pose.keypoints[3]; // Index 3 corresponds to the left ear
+        if (leftEar && leftEar.score > 0.2) {
+          image(earImage, leftEar.position.x - 15, leftEar.position.y - 15, 30, 30);
+        }
+      }
     }
   }
 }
